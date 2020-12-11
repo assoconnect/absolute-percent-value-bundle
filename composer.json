@@ -26,8 +26,8 @@
     },
     "require": {
         "php": "^7.4",
-        "symfony/framework-bundle": "^5.2",
-        "symfony/serializer": "^5.2",
-        "beberlei/assert": "^3.3"
+        "symfony/framework-bundle": "^5.0",
+        "symfony/serializer": "^5.1.8",
+        "beberlei/assert": "^3.2.7"
     }
 }

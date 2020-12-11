@@ -25,10 +25,7 @@ class Value
 
     public function __construct(string $type, string $value)
     {
-        // check type is valid
         Assertion::inArray($type, self::TYPES);
-
-        // check value is numeric
         Assertion::numeric($value);
 
         Assertion::greaterThan(intval($value), 1);

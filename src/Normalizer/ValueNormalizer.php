@@ -40,7 +40,7 @@ class ValueNormalizer implements NormalizerInterface, DenormalizerInterface
 
         return [
             'type' => $object->getType(),
-            'value' => preg_replace('/\s+/', '', $object->getValue())
+            'value' => $object->getValue()
         ];
     }
 
@@ -60,7 +60,10 @@ class ValueNormalizer implements NormalizerInterface, DenormalizerInterface
     public function denormalize($data, string $type, string $format = null, array $context = [])
     {
         try {
-            return '' === $data || null === $data ? null : new Value($data['type'], $data['value']);
+            if ('' === $data || null === $data) {
+                return null;
+            }
+            return  new Value($data['type'], $data['value']);
         } catch (\Exception $e) {
             throw new NotNormalizableValueException($e->getMessage(), $e->getCode(), $e);
         }

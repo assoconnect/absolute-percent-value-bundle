@@ -17,17 +17,3 @@ It has two attributes:
 * a value, which is a string numeric positive
 
 If the type of the AbsolutePercentValue is 'Percent', then its value must be less than 10000 (100%).
-
-## How-to
-
-* DONE: Update the current README replacing `your-repo` with the real name of your repo
-* DONE: Update the [sonar-project.properties](./sonar-project.properties) file replacing `your-repo` with the real name of your repo
-* DONE: Update the [composer.json](./composer.json) file replacing `your-repo` with the real name of your repo, and the PSR setting. Add also a description and some keywords
-
-* Create a project at [SonarCloud](https://sonarcloud.io/projects/create) with `assoconnect_your-repo` as key and `your-repo` as display name
-* Get a [SonarCloud token](https://sonarcloud.io/account/security/) then add it as the `SONAR_TOKEN` environnement variable on Travis CI at https://travis-ci.com/github/assoconnect/your-repo/settings
-* Code must be placed in `src`
-* Tests must be placed in `tests`
-* Publish it at [Packagist](https://packagist.org/packages/submit)
-* Write a relevant README
-* Remove this how-to section of the README
