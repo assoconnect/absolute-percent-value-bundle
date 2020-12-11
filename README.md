@@ -6,7 +6,7 @@
 ## Installation
 
 ```
-composer require assoconnect/your-repo
+composer require assoconnect/absolute-percent-value-bundle
 ```
 
 ## How-to
