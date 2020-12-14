@@ -7,9 +7,9 @@ namespace AssoConnect\AbsolutePercentValueBundle\Object;
 use Assert\Assertion;
 
 /**
- * Value representing either an absolute value or a percent
+ * AbsolutePercentValue representing either an absolute value or a percent
  */
-class Value
+class AbsolutePercentValue
 {
     public const TYPE_ABSOLUTE = 'ABSOLUTE';
     public const TYPE_PERCENT = 'PERCENT';

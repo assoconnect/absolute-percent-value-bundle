@@ -2,27 +2,25 @@
 
 declare(strict_types=1);
 
-
 namespace AssoConnect\AbsolutePercentValueBundle\Tests\Normalizer;
 
-
-use AssoConnect\AbsolutePercentValueBundle\Normalizer\ValueNormalizer;
-use AssoConnect\AbsolutePercentValueBundle\Object\Value;
+use AssoConnect\AbsolutePercentValueBundle\Normalizer\AbsolutePercentValueNormalizer;
+use AssoConnect\AbsolutePercentValueBundle\Object\AbsolutePercentValue;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 
-class ValueNormalizerTest extends TestCase
+class AbsolutePercentValueNormalizerTest extends TestCase
 {
-    private ValueNormalizer $valueNormalizer;
+    private AbsolutePercentValueNormalizer $valueNormalizer;
 
     protected function setUp(): void
     {
-        $this->valueNormalizer = new ValueNormalizer();
+        $this->valueNormalizer = new AbsolutePercentValueNormalizer();
     }
 
     public function providerSupportsNormalization()
     {
-        yield [new Value(Value::TYPE_ABSOLUTE, '20000'), true];
+        yield [new AbsolutePercentValue(AbsolutePercentValue::TYPE_ABSOLUTE, '20000'), true];
         yield [new \stdClass(), false];
     }
 
@@ -39,11 +37,11 @@ class ValueNormalizerTest extends TestCase
 
     public function testNormalize()
     {
-        $value = new Value(Value::TYPE_ABSOLUTE, '20000');
+        $value = new AbsolutePercentValue(AbsolutePercentValue::TYPE_ABSOLUTE, '20000');
 
         $this->assertSame(
             [
-                'type' => Value::TYPE_ABSOLUTE,
+                'type' => AbsolutePercentValue::TYPE_ABSOLUTE,
                 'value' => '20000'
             ],
             $this->valueNormalizer->normalize($value)
@@ -52,7 +50,7 @@ class ValueNormalizerTest extends TestCase
 
     public function providerSupportsDenormalization()
     {
-        yield [Value::class, true];
+        yield [AbsolutePercentValue::class, true];
         yield [\stdClass::class, false];
     }
 
@@ -80,14 +78,14 @@ class ValueNormalizerTest extends TestCase
      */
     public function testDenormalizeNull($data)
     {
-        $value = $this->valueNormalizer->denormalize($data, Value::class);
+        $value = $this->valueNormalizer->denormalize($data, AbsolutePercentValue::class);
         $this->assertNull($value);
     }
 
     public function testDenormalizeSuccess()
     {
-        $data = ['type' => Value::TYPE_ABSOLUTE, 'value' => '2000'];
-        $value = $this->valueNormalizer->denormalize($data, Value::class);
+        $data = ['type' => AbsolutePercentValue::TYPE_ABSOLUTE, 'value' => '2000'];
+        $value = $this->valueNormalizer->denormalize($data, AbsolutePercentValue::class);
 
         $this->assertSame($data['type'], $value->getType());
         $this->assertSame($data['value'], $value->getValue());
@@ -95,8 +93,8 @@ class ValueNormalizerTest extends TestCase
 
     public function testDenormalizeFailure()
     {
-        $data = ['type' => Value::TYPE_ABSOLUTE];
+        $data = ['type' => AbsolutePercentValue::TYPE_ABSOLUTE];
         $this->expectException(NotNormalizableValueException::class);
-        $this->valueNormalizer->denormalize($data, Value::class);
+        $this->valueNormalizer->denormalize($data, AbsolutePercentValue::class);
     }
 }
