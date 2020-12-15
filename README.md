@@ -1,7 +1,7 @@
 # AbsolutePercentValueBundle
 
 [![Build Status](https://travis-ci.org/assoconnect/absolute-percent-value-bundle.svg?branch=master)](https://travis-ci.org/assoconnect/absolute-percent-value-bundle)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=assoconnect-absolute-percent-value-bundle&metric=alert_status)](https://sonarcloud.io/dashboard?id=assoconnectabsolute-percent-value-bundle)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=assoconnect-absolute-percent-value-bundle&metric=alert_status)](https://sonarcloud.io/dashboard?id=assoconnect-absolute-percent-value-bundle)
 
 ## Installation
 
