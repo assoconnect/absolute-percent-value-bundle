@@ -1,0 +1,4 @@
+services:
+  AssoConnect\AbsolutePercentValueBundle\Normalizer\AbsolutePercentValueNormalizer:
+    tags:
+      - 'serializer.normalizer'
