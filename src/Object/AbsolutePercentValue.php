@@ -49,4 +49,9 @@ class AbsolutePercentValue
     {
         return $this->value;
     }
+
+    public function __toString(): string
+    {
+        return $this->type . ' ' . $this->value;
+    }
 }
