@@ -13,7 +13,7 @@ composer require assoconnect/absolute-percent-value-bundle
 An [AbsolutePercentValue](src/Object/AbsolutePercentValue.php) can be used to represent either an absolute value or a percent.
 
 It has two attributes:
-* a type which can be either 'PERCENT' or 'ABSOLUTE'
-* a value, which is a string numeric positive
+* A type which can be either 'PERCENT' or 'ABSOLUTE'
+* A value which is a string numeric positive
 
 If the type of the AbsolutePercentValue is 'Percent', then its value must be less than 10000 (100%).
