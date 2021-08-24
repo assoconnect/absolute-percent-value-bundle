@@ -28,7 +28,7 @@ class AbsolutePercentValue
         Assertion::inArray($type, self::TYPES);
         Assertion::numeric($value);
 
-        Assertion::greaterThan(intval($value), 1);
+        Assertion::greaterOrEqualThan(intval($value), 1);
 
         // if type is PERCENT, check value is valid (1 < $value < 10000)
         if ($type === self::TYPE_PERCENT) {
