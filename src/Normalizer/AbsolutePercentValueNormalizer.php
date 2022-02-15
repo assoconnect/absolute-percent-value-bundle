@@ -16,20 +16,13 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
  */
 class AbsolutePercentValueNormalizer implements NormalizerInterface, DenormalizerInterface
 {
-    private static $supportedTypes = [
-        AbsolutePercentValue::class => true,
-    ];
-
-    public function __construct(array $defaultContext = [])
-    {
-    }
-
     /**
-     * {@inheritdoc}
-     *
+     * @param mixed $object
+     * @param mixed[] $context
+     * @return mixed[]
      * @throws InvalidArgumentException
      */
-    public function normalize($object, string $format = null, array $context = [])
+    public function normalize($object, string $format = null, array $context = []): array
     {
         if (!$object instanceof AbsolutePercentValue) {
             throw new InvalidArgumentException(sprintf(
@@ -45,19 +38,20 @@ class AbsolutePercentValueNormalizer implements NormalizerInterface, Denormalize
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $data
      */
-    public function supportsNormalization($data, string $format = null)
+    public function supportsNormalization($data, string $format = null): bool
     {
         return $data instanceof AbsolutePercentValue;
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $data
+     * @param array<mixed> $context
      *
      * @throws NotNormalizableValueException
      */
-    public function denormalize($data, string $type, string $format = null, array $context = [])
+    public function denormalize($data, string $type, string $format = null, array $context = []): ?AbsolutePercentValue
     {
         try {
             if ('' === $data || null === $data) {
@@ -70,10 +64,10 @@ class AbsolutePercentValueNormalizer implements NormalizerInterface, Denormalize
     }
 
     /**
-     * {@inheritdoc}
+     * @param mixed $data
      */
-    public function supportsDenormalization($data, string $type, string $format = null)
+    public function supportsDenormalization($data, string $type, string $format = null): bool
     {
-        return isset(self::$supportedTypes[$type]);
+        return $type === AbsolutePercentValue::class;
     }
 }
