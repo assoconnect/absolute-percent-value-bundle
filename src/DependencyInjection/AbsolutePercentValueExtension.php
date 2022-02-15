@@ -11,7 +11,10 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 class AbsolutePercentValueExtension extends Extension
 {
-    public function load(array $configs, ContainerBuilder $container)
+    /**
+     * @param mixed[] $configs
+     */
+    public function load(array $configs, ContainerBuilder $container): void
     {
         // Loading config.yml file
         $loader = new YamlFileLoader(

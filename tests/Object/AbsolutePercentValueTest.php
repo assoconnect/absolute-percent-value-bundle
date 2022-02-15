@@ -58,13 +58,11 @@ class AbsolutePercentValueTest extends TestCase
 
         $absolutePercentValue = new AbsolutePercentValue($type, $value);
 
-        $this->assertSame($type, $absolutePercentValue->getType());
-        $this->assertSame($value, $absolutePercentValue->getValue());
+        self::assertSame($type, $absolutePercentValue->getType());
+        self::assertSame($value, $absolutePercentValue->getValue());
     }
 
     /**
-     * @param $type
-     *
      * @dataProvider providerTypes
      */
     public function testConstructSuccess(string $type): void
@@ -72,11 +70,12 @@ class AbsolutePercentValueTest extends TestCase
         $value = '2000';
 
         $absolutePercentValue = new AbsolutePercentValue($type, $value);
-        $this->assertSame($type, $absolutePercentValue->getType());
-        $this->assertSame($value, $absolutePercentValue->getValue());
+        self::assertSame($type, $absolutePercentValue->getType());
+        self::assertSame($value, $absolutePercentValue->getValue());
     }
 
-    public function providerTypes()
+    /** @return iterable<mixed> */
+    public function providerTypes(): iterable
     {
         yield [AbsolutePercentValue::TYPE_PERCENT];
         yield [AbsolutePercentValue::TYPE_ABSOLUTE];

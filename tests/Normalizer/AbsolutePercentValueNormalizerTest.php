@@ -18,28 +18,27 @@ class AbsolutePercentValueNormalizerTest extends TestCase
         $this->valueNormalizer = new AbsolutePercentValueNormalizer();
     }
 
-    public function providerSupportsNormalization()
+    /** @return iterable<mixed> */
+    public function providerSupportsNormalization(): iterable
     {
         yield [new AbsolutePercentValue(AbsolutePercentValue::TYPE_ABSOLUTE, '20000'), true];
         yield [new \stdClass(), false];
     }
 
     /**
-     * @param $object
-     * @param $result
-     *
+     * @param mixed $object
      * @dataProvider providerSupportsNormalization
      */
-    public function testSupportsNormalization($object, $result)
+    public function testSupportsNormalization($object, bool $result): void
     {
-        $this->assertSame($result, $this->valueNormalizer->supportsNormalization($object));
+        self::assertSame($result, $this->valueNormalizer->supportsNormalization($object));
     }
 
-    public function testNormalize()
+    public function testNormalize(): void
     {
         $value = new AbsolutePercentValue(AbsolutePercentValue::TYPE_ABSOLUTE, '20000');
 
-        $this->assertSame(
+        self::assertSame(
             [
                 'type' => AbsolutePercentValue::TYPE_ABSOLUTE,
                 'value' => '20000'
@@ -48,50 +47,48 @@ class AbsolutePercentValueNormalizerTest extends TestCase
         );
     }
 
-    public function providerSupportsDenormalization()
+    /** @return iterable<mixed> */
+    public function providerSupportsDenormalization(): iterable
     {
         yield [AbsolutePercentValue::class, true];
         yield [\stdClass::class, false];
     }
 
     /**
-     * @param $type
-     * @param $result
-     *
      * @dataProvider providerSupportsDenormalization
      */
-    public function testSupportsDenormalization($type, $result)
+    public function testSupportsDenormalization(string $type, bool $result): void
     {
-        $this->assertSame($result, $this->valueNormalizer->supportsDenormalization([], $type));
+        self::assertSame($result, $this->valueNormalizer->supportsDenormalization([], $type));
     }
 
-    public function providerTestDenormalize()
+    /**
+     * @dataProvider providerTestDenormalize
+     */
+    public function testDenormalizeNull(?string $data): void
+    {
+        $value = $this->valueNormalizer->denormalize($data, AbsolutePercentValue::class);
+        self::assertNull($value);
+    }
+
+    /** @return iterable<mixed> */
+    public function providerTestDenormalize(): iterable
     {
         yield [''];
         yield [null];
     }
 
-    /**
-     * @param $data
-     *
-     * @dataProvider providerTestDenormalize
-     */
-    public function testDenormalizeNull($data)
-    {
-        $value = $this->valueNormalizer->denormalize($data, AbsolutePercentValue::class);
-        $this->assertNull($value);
-    }
-
-    public function testDenormalizeSuccess()
+    public function testDenormalizeSuccess(): void
     {
         $data = ['type' => AbsolutePercentValue::TYPE_ABSOLUTE, 'value' => '2000'];
         $value = $this->valueNormalizer->denormalize($data, AbsolutePercentValue::class);
 
-        $this->assertSame($data['type'], $value->getType());
-        $this->assertSame($data['value'], $value->getValue());
+        self::assertNotNull($value);
+        self::assertSame($data['type'], $value->getType());
+        self::assertSame($data['value'], $value->getValue());
     }
 
-    public function testDenormalizeFailure()
+    public function testDenormalizeFailure(): void
     {
         $data = ['type' => AbsolutePercentValue::TYPE_ABSOLUTE];
         $this->expectException(NotNormalizableValueException::class);
