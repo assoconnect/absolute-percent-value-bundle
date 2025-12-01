@@ -72,4 +72,12 @@ class AbsolutePercentValueNormalizer implements NormalizerInterface, Denormalize
     {
         return $type === AbsolutePercentValue::class;
     }
+
+    /**
+     * @return array<class-string, bool>
+     */
+    public function getSupportedTypes(?string $format): array
+    {
+        return [AbsolutePercentValue::class => false];
+    }
 }
