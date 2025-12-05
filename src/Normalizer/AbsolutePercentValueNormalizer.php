@@ -22,7 +22,7 @@ class AbsolutePercentValueNormalizer implements NormalizerInterface, Denormalize
      * @return mixed[]
      * @throws InvalidArgumentException
      */
-    public function normalize($object, string $format = null, array $context = []): array
+    public function normalize(mixed $object, ?string $format = null, array $context = []): array
     {
         if (!$object instanceof AbsolutePercentValue) {
             throw new InvalidArgumentException(sprintf(
@@ -41,7 +41,7 @@ class AbsolutePercentValueNormalizer implements NormalizerInterface, Denormalize
      * @param mixed $data
      * @param array<mixed> $context
      */
-    public function supportsNormalization($data, string $format = null, array $context = []): bool
+    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
     {
         return $data instanceof AbsolutePercentValue;
     }
@@ -52,7 +52,7 @@ class AbsolutePercentValueNormalizer implements NormalizerInterface, Denormalize
      *
      * @throws NotNormalizableValueException
      */
-    public function denormalize($data, string $type, string $format = null, array $context = []): ?AbsolutePercentValue
+    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): ?AbsolutePercentValue
     {
         try {
             if ('' === $data || null === $data) {
@@ -68,7 +68,7 @@ class AbsolutePercentValueNormalizer implements NormalizerInterface, Denormalize
      * @param mixed $data
      * @param array<mixed> $context
      */
-    public function supportsDenormalization($data, string $type, string $format = null, array $context = []): bool
+    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
     {
         return $type === AbsolutePercentValue::class;
     }
