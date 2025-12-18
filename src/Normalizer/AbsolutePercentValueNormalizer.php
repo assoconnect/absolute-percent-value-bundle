@@ -48,7 +48,7 @@ class AbsolutePercentValueNormalizer implements NormalizerInterface, Denormalize
 
     /**
      * @param mixed $data
-     * @param class-string<AbsolutePercentValue>
+     * @param class-string<AbsolutePercentValue> $type
      * @param array<mixed> $context
      *
      * @throws NotNormalizableValueException
@@ -63,7 +63,7 @@ class AbsolutePercentValueNormalizer implements NormalizerInterface, Denormalize
             if ('' === $data || null === $data) {
                 throw new NotNormalizableValueException();
             }
-            return  new AbsolutePercentValue($data['type'], $data['value']);
+            return new AbsolutePercentValue($data['type'], $data['value']);
         } catch (\Exception $e) {
             throw new NotNormalizableValueException($e->getMessage(), $e->getCode(), $e);
         }
