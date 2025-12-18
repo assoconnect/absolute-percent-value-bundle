@@ -65,10 +65,10 @@ class AbsolutePercentValueNormalizerTest extends TestCase
     /**
      * @dataProvider providerTestDenormalize
      */
-    public function testDenormalizeNull(?string $data): void
+    public function testDenormalizeFailure(mixed $data): void
     {
-        $value = $this->valueNormalizer->denormalize($data, AbsolutePercentValue::class);
-        self::assertNull($value);
+        $this->expectException(NotNormalizableValueException::class);
+        $this->valueNormalizer->denormalize($data, AbsolutePercentValue::class);
     }
 
     /** @return iterable<mixed> */
@@ -76,6 +76,7 @@ class AbsolutePercentValueNormalizerTest extends TestCase
     {
         yield [''];
         yield [null];
+        yield [['type' => AbsolutePercentValue::TYPE_ABSOLUTE]];
     }
 
     public function testDenormalizeSuccess(): void
@@ -86,12 +87,5 @@ class AbsolutePercentValueNormalizerTest extends TestCase
         self::assertNotNull($value);
         self::assertSame($data['type'], $value->getType());
         self::assertSame($data['value'], $value->getValue());
-    }
-
-    public function testDenormalizeFailure(): void
-    {
-        $data = ['type' => AbsolutePercentValue::TYPE_ABSOLUTE];
-        $this->expectException(NotNormalizableValueException::class);
-        $this->valueNormalizer->denormalize($data, AbsolutePercentValue::class);
     }
 }
