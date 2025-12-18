@@ -47,6 +47,7 @@ class AbsolutePercentValueNormalizer implements NormalizerInterface, Denormalize
     }
 
     /**
+     * @implements DenormalizerInterface<AbsolutePercentValue>
      * @param mixed $data
      * @param array<mixed> $context
      *
@@ -72,8 +73,12 @@ class AbsolutePercentValueNormalizer implements NormalizerInterface, Denormalize
      * @param mixed $data
      * @param array<mixed> $context
      */
-    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
-    {
+    public function supportsDenormalization(
+        mixed $data,
+        string $type,
+        ?string $format = null,
+        array $context = []
+    ): bool {
         return $type === AbsolutePercentValue::class;
     }
 
