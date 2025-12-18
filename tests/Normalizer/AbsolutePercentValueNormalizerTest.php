@@ -84,7 +84,6 @@ class AbsolutePercentValueNormalizerTest extends TestCase
         $data = ['type' => AbsolutePercentValue::TYPE_ABSOLUTE, 'value' => '2000'];
         $value = $this->valueNormalizer->denormalize($data, AbsolutePercentValue::class);
 
-        self::assertNotNull($value);
         self::assertSame($data['type'], $value->getType());
         self::assertSame($data['value'], $value->getValue());
     }
