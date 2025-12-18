@@ -67,7 +67,7 @@ class AbsolutePercentValueNormalizer implements NormalizerInterface, Denormalize
             if ('' === $data || null === $data) {
                 throw new NotNormalizableValueException();
             }
-            return new AbsolutePercentValue($data['type'], $data['value']);
+            return new $type($data['type'], $data['value']);
         } catch (\Exception $e) {
             throw new NotNormalizableValueException($e->getMessage(), $e->getCode(), $e);
         }
