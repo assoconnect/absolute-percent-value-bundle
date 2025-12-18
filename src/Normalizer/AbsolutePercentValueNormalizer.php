@@ -47,7 +47,8 @@ class AbsolutePercentValueNormalizer implements NormalizerInterface, Denormalize
     }
 
     /**
-     * @implements DenormalizerInterface::denormalize<AbsolutePercentValue>
+     * @param class-string<AbsolutePercentValue> $type
+     * @return AbsolutePercentValue
      * @throws NotNormalizableValueException
      */
     public function denormalize(
@@ -55,7 +56,7 @@ class AbsolutePercentValueNormalizer implements NormalizerInterface, Denormalize
         string $type,
         ?string $format = null,
         array $context = []
-    ): AbsolutePercentValue {
+    ): mixed {
         try {
             if ('' === $data || null === $data) {
                 throw new NotNormalizableValueException();
