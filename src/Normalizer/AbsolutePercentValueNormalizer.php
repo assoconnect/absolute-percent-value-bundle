@@ -55,7 +55,7 @@ class AbsolutePercentValueNormalizer implements NormalizerInterface, Denormalize
         string $type,
         ?string $format = null,
         array $context = []
-    ) {
+    ): AbsolutePercentValue {
         try {
             if ('' === $data || null === $data) {
                 throw new NotNormalizableValueException();
