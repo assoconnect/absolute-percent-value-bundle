@@ -47,8 +47,7 @@ class AbsolutePercentValueNormalizer implements NormalizerInterface, Denormalize
     }
 
     /**
-     * @param class-string<AbsolutePercentValue> $type
-     * @return AbsolutePercentValue
+     * @phpstan-ignore float.type
      * @throws NotNormalizableValueException
      */
     public function denormalize(
