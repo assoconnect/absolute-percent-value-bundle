@@ -47,8 +47,8 @@ class AbsolutePercentValueNormalizer implements NormalizerInterface, Denormalize
     }
 
     /**
-     * @implements DenormalizerInterface<AbsolutePercentValue>
      * @param mixed $data
+     * @param class-string<AbsolutePercentValue>
      * @param array<mixed> $context
      *
      * @throws NotNormalizableValueException
