@@ -63,6 +63,8 @@ class AbsolutePercentValueNormalizer implements NormalizerInterface, Denormalize
         ?string $format = null,
         array $context = []
     ): mixed {
+        assert($type === AbsolutePercentValue::class);
+
         try {
             if ('' === $data || null === $data) {
                 throw new NotNormalizableValueException();
