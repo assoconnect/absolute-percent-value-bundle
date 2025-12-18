@@ -47,8 +47,13 @@ class AbsolutePercentValueNormalizer implements NormalizerInterface, Denormalize
     }
 
     /**
+     * @template TObject of object
+     *
      * @param mixed $data
+     * @param class-string<TObject> $type
      * @param array<mixed> $context
+     *
+     * @return TObject
      *
      * @throws NotNormalizableValueException
      */
