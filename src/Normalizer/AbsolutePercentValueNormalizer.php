@@ -6,9 +6,10 @@ namespace AssoConnect\AbsolutePercentValueBundle\Normalizer;
 
 use AssoConnect\AbsolutePercentValueBundle\Object\AbsolutePercentValue;
 use Symfony\Component\Serializer\Exception\InvalidArgumentException;
-use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
+use Symfony\Component\Serializer\Exception\UnexpectedValueException;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Throwable;
 
 /**
  * Normalizes an instance of {@see AbsolutePercentValue} to an array ['type' => ..., 'value' => ...].
@@ -17,14 +18,14 @@ use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 class AbsolutePercentValueNormalizer implements NormalizerInterface, DenormalizerInterface
 {
     /**
-     * @param mixed $object
+     * @param mixed $data
      * @param mixed[] $context
      * @return mixed[]
      * @throws InvalidArgumentException
      */
-    public function normalize(mixed $object, ?string $format = null, array $context = []): array
+    public function normalize(mixed $data, ?string $format = null, array $context = []): array
     {
-        if (!$object instanceof AbsolutePercentValue) {
+        if (!$data instanceof AbsolutePercentValue) {
             throw new InvalidArgumentException(sprintf(
                 'The object must be an instance of "%s".',
                 AbsolutePercentValue::class
@@ -32,8 +33,8 @@ class AbsolutePercentValueNormalizer implements NormalizerInterface, Denormalize
         }
 
         return [
-            'type' => $object->getType(),
-            'value' => $object->getValue()
+            'type' => $data->getType(),
+            'value' => $data->getValue()
         ];
     }
 
@@ -47,21 +48,22 @@ class AbsolutePercentValueNormalizer implements NormalizerInterface, Denormalize
     }
 
     /**
-     * @throws NotNormalizableValueException
+     * @inheritDoc
      */
     public function denormalize(
         mixed $data,
         string $type,
         ?string $format = null,
         array $context = []
-    ): mixed {
+    ): AbsolutePercentValue {
+        if ('' === $data || null === $data) {
+            throw new UnexpectedValueException();
+        }
+
         try {
-            if ('' === $data || null === $data) {
-                throw new NotNormalizableValueException();
-            }
             return new AbsolutePercentValue($data['type'], $data['value']);
-        } catch (\Exception $e) {
-            throw new NotNormalizableValueException($e->getMessage(), $e->getCode(), $e);
+        } catch (Throwable $e) {
+            throw new UnexpectedValueException(previous: $e);
         }
     }
 
@@ -83,6 +85,6 @@ class AbsolutePercentValueNormalizer implements NormalizerInterface, Denormalize
      */
     public function getSupportedTypes(?string $format): array
     {
-        return [AbsolutePercentValue::class => false];
+        return [AbsolutePercentValue::class => true];
     }
 }
