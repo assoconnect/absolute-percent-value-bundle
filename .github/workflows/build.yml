@@ -9,11 +9,13 @@ on:
 jobs:
   build:
     strategy:
+      fail-fast: false
       matrix:
         php-versions: ['8.3', '8.4']
+        dependency-versions: ['lowest', 'highest']
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
       
@@ -22,8 +24,10 @@ jobs:
           php-version: ${{ matrix.php-versions }}
       
       - run: composer validate --strict
-      - run: composer config --no-plugins allow-plugins.dealerdirect/phpcodesniffer-composer-installer true
-      - run: composer install --prefer-dist --no-progress --no-suggest
+
+      - uses: ramsey/composer-install@v2
+        with:
+          dependency-versions: ${{ matrix.dependency-versions }}
 
       - run: vendor/bin/phpcs
         if: ${{ failure() ||  success() }}
@@ -53,5 +57,5 @@ jobs:
             -Dsonar.organization=assoconnect
             -Dsonar.sources=src
             -Dsonar.tests=tests
-            -Dsonar.php.coverage.reportPaths=./clover.xml
-            -Dsonar.php.tests.reportPath=./phpunit.report.xml
+            -Dsonar.php.coverage.reportPaths=clover.xml
+            -Dsonar.php.tests.reportPath=phpunit.report.xml
