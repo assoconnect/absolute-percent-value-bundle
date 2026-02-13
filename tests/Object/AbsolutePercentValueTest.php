@@ -75,7 +75,7 @@ class AbsolutePercentValueTest extends TestCase
     }
 
     /** @return iterable<mixed> */
-    public function providerTypes(): iterable
+    public static function providerTypes(): iterable
     {
         yield [AbsolutePercentValue::TYPE_PERCENT];
         yield [AbsolutePercentValue::TYPE_ABSOLUTE];
