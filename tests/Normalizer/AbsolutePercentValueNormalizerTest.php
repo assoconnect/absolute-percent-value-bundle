@@ -20,7 +20,7 @@ class AbsolutePercentValueNormalizerTest extends TestCase
     }
 
     /** @return iterable<mixed> */
-    public function providerSupportsNormalization(): iterable
+    public static function providerSupportsNormalization(): iterable
     {
         yield [new AbsolutePercentValue(AbsolutePercentValue::TYPE_ABSOLUTE, '20000'), true];
         yield [new \stdClass(), false];
@@ -49,7 +49,7 @@ class AbsolutePercentValueNormalizerTest extends TestCase
     }
 
     /** @return iterable<mixed> */
-    public function providerSupportsDenormalization(): iterable
+    public static function providerSupportsDenormalization(): iterable
     {
         yield [AbsolutePercentValue::class, true];
         yield [\stdClass::class, false];
@@ -73,7 +73,7 @@ class AbsolutePercentValueNormalizerTest extends TestCase
     }
 
     /** @return iterable<mixed> */
-    public function providerTestDenormalize(): iterable
+    public static function providerTestDenormalize(): iterable
     {
         yield [''];
         yield [null];
