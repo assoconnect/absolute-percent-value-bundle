@@ -47,12 +47,13 @@ class AbsolutePercentValueNormalizer implements NormalizerInterface, Denormalize
         return $data instanceof AbsolutePercentValue;
     }
 
+    /** @phpstan-ignore method.childReturnType */
     public function denormalize(
         mixed $data,
         string $type,
         ?string $format = null,
         array $context = []
-    ): mixed {
+    ): AbsolutePercentValue {
         if ('' === $data || null === $data) {
             throw new UnexpectedValueException();
         }
