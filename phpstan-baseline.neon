@@ -1,7 +1,0 @@
-parameters:
-	ignoreErrors:
-		-
-			message: '#^Return type \(AssoConnect\\AbsolutePercentValueBundle\\Object\\AbsolutePercentValue\) of method AssoConnect\\AbsolutePercentValueBundle\\Normalizer\\AbsolutePercentValueNormalizer\:\:denormalize\(\) should be covariant with return type \(\(\$type is class\-string\<object\> \? object \: mixed\)\) of method Symfony\\Component\\Serializer\\Normalizer\\DenormalizerInterface\:\:denormalize\(\)$#'
-			identifier: method.childReturnType
-			count: 1
-			path: src/Normalizer/AbsolutePercentValueNormalizer.php
