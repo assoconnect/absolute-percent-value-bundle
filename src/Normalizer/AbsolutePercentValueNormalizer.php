@@ -59,7 +59,7 @@ class AbsolutePercentValueNormalizer implements NormalizerInterface, Denormalize
         }
 
         try {
-            return new AbsolutePercentValue($data['type'], $data['value']);
+            return new AbsolutePercentValue($data['type'] ?? null, $data['value'] ?? null);
         } catch (Throwable $e) {
             throw new UnexpectedValueException(previous: $e);
         }
