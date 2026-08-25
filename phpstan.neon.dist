@@ -2,6 +2,13 @@ parameters:
     paths:
         - src/
         - tests/
+    ignoreErrors:
+        # Only reported by the newest symfony/serializer stubs (highest deps),
+        # older releases type the return as plain mixed (lowest deps).
+        -
+            identifier: method.childReturnType
+            path: src/Normalizer/AbsolutePercentValueNormalizer.php
+            reportUnmatched: false
 
 includes:
     - vendor/assoconnect/php-quality-config/phpstan.extension.neon
