@@ -7,6 +7,7 @@ namespace AssoConnect\AbsolutePercentValueBundle\Tests\Object;
 use AssoConnect\AbsolutePercentValueBundle\Object\AbsolutePercentValue;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class AbsolutePercentValueTest extends TestCase
 {
@@ -62,9 +63,7 @@ class AbsolutePercentValueTest extends TestCase
         self::assertSame($value, $absolutePercentValue->getValue());
     }
 
-    /**
-     * @dataProvider providerTypes
-     */
+    #[DataProvider('providerTypes')]
     public function testConstructSuccess(string $type): void
     {
         $value = '2000';

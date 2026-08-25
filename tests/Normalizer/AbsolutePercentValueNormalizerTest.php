@@ -9,6 +9,7 @@ use AssoConnect\AbsolutePercentValueBundle\Object\AbsolutePercentValue;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Serializer\Exception\NotNormalizableValueException;
 use Symfony\Component\Serializer\Exception\UnexpectedValueException;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class AbsolutePercentValueNormalizerTest extends TestCase
 {
@@ -28,8 +29,8 @@ class AbsolutePercentValueNormalizerTest extends TestCase
 
     /**
      * @param mixed $data
-     * @dataProvider providerSupportsNormalization
      */
+    #[DataProvider('providerSupportsNormalization')]
     public function testSupportsNormalization($data, bool $result): void
     {
         self::assertSame($result, $this->valueNormalizer->supportsNormalization($data));
@@ -55,17 +56,13 @@ class AbsolutePercentValueNormalizerTest extends TestCase
         yield [\stdClass::class, false];
     }
 
-    /**
-     * @dataProvider providerSupportsDenormalization
-     */
+    #[DataProvider('providerSupportsDenormalization')]
     public function testSupportsDenormalization(string $type, bool $result): void
     {
         self::assertSame($result, $this->valueNormalizer->supportsDenormalization([], $type));
     }
 
-    /**
-     * @dataProvider providerTestDenormalize
-     */
+    #[DataProvider('providerTestDenormalize')]
     public function testDenormalizeFailure(mixed $data): void
     {
         $this->expectException(UnexpectedValueException::class);
